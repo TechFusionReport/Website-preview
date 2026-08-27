@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "title": "Preview Isolation Test Article Safe Scratch Publish",
+    "seoTitle": "Preview Isolation Test Article for Safe Scratch Publishing",
+    "slug": "2026-08-27-preview-isolation-test-article",
+    "date": "2026-08-27",
+    "category": "Technology",
+    "excerpt": "A fake preview-only article used to confirm the TechFusion preview pipeline writes to isolated Cloudflare and GitHub resources.",
+    "url": "/_posts/2026-08-27-preview-isolation-test-article.html"
+  }
+]
