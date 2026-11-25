@@ -14,9 +14,11 @@
     "feature": false,
     "file": "2026-11-25-rehearsal-receipt-gate-test.html",
     "tags": [
+      "publishing pipeline rehearsal",
       "Technology",
       "Automation",
       "Smart Tech"
-    ]
+    ],
+    "description": "A rehearsal article used to test two-gate approval and signed receipts before anything reaches the production site."
   }
 ]
