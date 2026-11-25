@@ -1,0 +1,57 @@
+# TechFusion OS — Website Implementation
+
+`/ops` is the Access-gated TechFusion OS control surface. It extends the existing editorial Ops Dashboard rather than replacing it.
+
+## Boundaries
+
+- This repository owns the `/ops` frontend implementation.
+- Automations owns `/ops/api/*`, authentication validation, Notion access, automation controls, and backend integrations.
+- Notion owns durable editorial/workflow/task state and the cross-system architecture/documentation contract.
+- Cloudflare owns live deployed Workers, routes, Access, DNS, KV bindings, secrets, and recoverable runtime cache.
+- OmniRoute owns live AI provider/model routing state.
+
+TechFusion OS aggregates those systems. It must not create a duplicate authoritative database.
+
+## Documentation policy
+
+Do not duplicate changing backlog, health, deployment, or infrastructure state in this file or `Agents.md`. Read those from their authoritative systems. This document describes only implementation boundaries that developers need while changing `/ops`.
+
+Cross-system architecture and ownership rules are maintained in Notion under **TechFusion OS — Architecture & Documentation Contract**. Repository-specific implementation details belong here. PRs document individual code changes.
+
+## Phase 1
+
+1. Rename the shell to TechFusion OS.
+2. Preserve the existing Command Center/overview API and all editorial review behavior.
+3. Group existing editorial functions under Editorial.
+4. Reserve navigation for Agents & Automation, AI / OmniRoute, Infrastructure, Development, Work, Analytics & Business, and System.
+5. Planned modules must be visibly marked planned until backed by real authoritative data. Never render fabricated health or counts.
+6. Add backend endpoints in Automations before frontend modules that depend on them.
+
+## Safety
+
+Human confirmation remains required for publishing, destructive operations, bulk actions, security changes, credential changes, and AI regeneration where the operating contract requires it. Never render secret values in the frontend.
+## Command Center data contract
+
+The Command Center consumes `GET /ops/api/command-center` from Automations. The response normalizes read-only state from:
+
+- TFR Task Tracker for professional work and priority/status.
+- GitHub for open TechFusionReport pull requests.
+- Cloudflare for Workers, Access applications, and tunnel state when the backend runtime has the required read credential.
+- Direct service probes for TechFusion API, the public Website, and OmniRoute.
+
+Every source returns an explicit `status` value. Missing credentials and upstream failures render as `unavailable` or `error`; the frontend must never replace them with assumed healthy state. Links always return operators to the authoritative record.
+
+
+## Observability data contract
+
+The Infrastructure view consumes the Access-gated `GET /ops/api/observability` endpoint from Automations. Prometheus remains the authoritative metric source and Grafana remains the detailed dashboard. The frontend renders normalized target health, firing-alert counts, and CPU/memory/disk utilization; it never connects to Prometheus directly or receives Cloudflare Access service-token credentials.
+
+Prometheus and Grafana must both be protected by Cloudflare Access before production rollout. Public Status uses a separate sanitized aggregate contract and never receives target identities, internal addresses, raw labels, scrape URLs, or detailed metrics.
+
+## Unified action queue
+
+The dashboard consumes `GET /ops/api/attention` as its operator-first “Action Required” view. The backend normalizes editorial review work, quality exceptions, capped transcription/publishing failures, critical tasks, draft pull requests, and service-health failures into one priority-ordered response.
+
+The response is a projection only. Notion remains authoritative for content state, the Task Tracker remains authoritative for work state, GitHub remains authoritative for PR state, and runtime systems remain authoritative for health. Direct actions use the existing governed `/ops/api/actions/*` endpoints; human authorization checkboxes and the Status ownership contract remain unchanged.
+
+Every content projection includes `jobId: tfr:<normalized Notion page id>`. This identifier is the cross-system correlation key; it does not create a second record or replace the Notion page ID.
