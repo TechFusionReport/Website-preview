@@ -1,5 +1,21 @@
 [
   {
+    "title": "Rehearsal 4: SEO Score Check (strong draft)",
+    "seoTitle": "Home Lab Backups: A Practical Guide That Actually Works",
+    "slug": "2026-11-26-home-lab-backups-practical-guide",
+    "date": "2026-11-26",
+    "category": "Technology",
+    "subcategory": "",
+    "readTime": "4 min read",
+    "excerpt": "Home lab backups without the guesswork: what to copy, how often to run it, where to store it, and how to prove a restore really works before you need it.",
+    "thumbnail": "",
+    "image": "",
+    "url": "/_posts/2026-11-26-home-lab-backups-practical-guide.html",
+    "feature": false,
+    "file": "2026-11-26-home-lab-backups-practical-guide.html",
+    "tags": []
+  },
+  {
     "title": "Rehearsal: Receipt Gate Test Article",
     "seoTitle": "Rehearsal: Receipt Gate Test Article for the TFR Pipeline",
     "slug": "2026-11-25-rehearsal-receipt-gate-test",
