@@ -13,7 +13,10 @@
     "url": "/_posts/2026-11-26-home-lab-backups-practical-guide.html",
     "feature": false,
     "file": "2026-11-26-home-lab-backups-practical-guide.html",
-    "tags": []
+    "tags": [
+      "home lab backups"
+    ],
+    "description": "Home lab backups without the guesswork: what to copy, how often to run it, where to store it, and how to prove a restore really works before you need it."
   },
   {
     "title": "Rehearsal: Receipt Gate Test Article",
